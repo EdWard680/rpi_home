@@ -1,0 +1,18 @@
+version: '2'
+volumes:
+    resin-data:
+    hass-config:
+services:
+    hass:
+        build: ./hass
+        cap_add:
+            - NET_ADMIN
+        restart: always
+        network_mode: host
+        volumes:
+            - 'hass-config:/config'
+    git:
+        build: ./git
+        restart: always
+        volumes:
+            - 'hass-config:/config'
